@@ -1,6 +1,7 @@
 <h2>Movies</h2>
 <p>Search for a movie by park name, title, or even day of the week!</p>
 <input id="searchbar" type="text" placeholder="Search">
+<input type="checkbox" name="vehicle1" value="Bike" checked>Upcoming Events<br>
 <ul id='movie-list'></ul>
 
 <script>
@@ -23,9 +24,7 @@
       input.addEventListener("keyup", function(e) {
         if (e.keyCode == 13) { // toggle upon pressing the enter key
           e.preventDefault(); // prevent default behavior
-          // alert(input.value);
-
-          movie_list.empty(); // clear out movie list
+          // alert(input.value)
 
           // search by day of the week
           if (input.value.toLowerCase() == "sunday" || input.value.toLowerCase() == "monday"
@@ -67,3 +66,9 @@
       });
   });
 </script>
+
+<style>
+  .movie-card {
+    padding-top: 50px;
+  }
+</style>
