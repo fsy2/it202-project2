@@ -1,34 +1,33 @@
-<html>
-  <head>
-    <style>
-       /* Set the size of the div element that contains the map */
-      #map {
-        height: 400px;  /* The height is 400 pixels */
-        width: 100%;  /* The width is the width of the web page */
-       }
-    </style>
-  </head
-  >
-  <body>
-    <h3>My Google Maps Demo</h3>
-    <!--The div element for the map -->
-    <div id="map"></div>
+<h2>Maps</h2>
+<p>Search for movie markers here in the City of Chicago!</p>
+<!--The div element for the map -->
+<div id="map"></div>
 
-    <script>
-      // Initialize and add the map
-      function initMap() {
-        // The location of Uluru
-        var uluru = {lat: -25.344, lng: 131.036};
-        // The map, centered at Uluru
-        var map = new google.maps.Map(
-            document.getElementById('map'), {zoom: 4, center: uluru});
-        // The marker, positioned at Uluru
-        var marker = new google.maps.Marker({position: uluru, map: map});
-      }
-    </script>
 
-    <script async defer
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxbnPjmpOFJaeCTeFv-By7kw9ONncSqy4&callback=initMap">
-    </script>
-  </body>
-</html>
+<script>
+  function initMap() {
+    var map = new google.maps.Map(
+      document.getElementById('map'), {zoom: 4, center: {lat: 40.0, lng: -80.0}});
+    for (var i = 0; i < location_list.length; i++) {
+      console.log(location_list[i].latitude + ", " + location_list[i].longitude);
+      var temp = {lat: parseFloat(location_list[i].latitude), lng: parseFloat(location_list[i].longitude)};
+      var marker = new google.maps.Marker({position: temp, map: map});
+    }
+  }
+
+  function clearMarkers() {
+    return;
+  }
+</script>
+
+<script async defer
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxbnPjmpOFJaeCTeFv-By7kw9ONncSqy4&callback=initMap">
+</script>
+
+<style>
+   /* Set the size of the div element that contains the map */
+  #map {
+    height: 400px;
+    width: 100%;
+   }
+</style>

@@ -5,6 +5,7 @@
 <ul id='movie-list'></ul>
 
 <script>
+  // var location_list = new Array();
   $(document).ready(function() {
       function parseString(str) {
           var temp = str.split(" ");
@@ -60,6 +61,8 @@
                 + "<p>Date: " + d.day  + ", " + d.date + "</p>"
                 + "<p>Location: " + d.park + ", " + d.park_address + "</p>"
                 + '</div></li>');
+              console.log(d.location.latitude + ", " + d.location.longitude);
+              location_list.push(d.location);
             });
           });
         }
