@@ -1,0 +1,69 @@
+<h2>Movies</h2>
+<p>Search for a movie by park name, title, or even day of the week!</p>
+<input id="searchbar" type="text" placeholder="Search">
+<ul id='movie-list'></ul>
+
+<script>
+  $(document).ready(function() {
+      function parseString(str) {
+          var temp = str.split(" ");
+          var retStr = "";
+
+          for (var i = 0; i < temp.length; i++) {
+            retStr += temp[i].charAt(0).toUpperCase() + temp[i].substring(1) + " ";
+          }
+
+          return retStr.substring(0, retStr.length - 1);
+      }
+
+      var input = document.getElementById("searchbar");
+      var movie_list = $('#movie-list'); // movie list
+      var url = " ";
+
+      input.addEventListener("keyup", function(e) {
+        if (e.keyCode == 13) { // toggle upon pressing the enter key
+          e.preventDefault(); // prevent default behavior
+          // alert(input.value);
+
+          movie_list.empty(); // clear out movie list
+
+          // search by day of the week
+          if (input.value.toLowerCase() == "sunday" || input.value.toLowerCase() == "monday"
+           || input.value.toLowerCase() == "tuesday" || input.value.toLowerCase() == "wednesday"
+           || input.value.toLowerCase() == "thursday" || input.value.toLowerCase() == "friday"
+           || input.value.toLowerCase() == "saturday") {
+             var day = input.value.charAt(0).toUpperCase() + input.value.substring(1, 3);
+             url = "https://data.cityofchicago.org/resource/7piw-z6r6.json?day=" + day;
+           }
+           // find by park
+           else if (input.value.toLowerCase().includes("park")) {
+             var park_name = parseString(input.value);
+             url = "https://data.cityofchicago.org/resource/7piw-z6r6.json?park=" + park_name;
+           }
+           // search by movie title
+           else {
+             var movie_title = parseString(input.value);
+             url = "https://data.cityofchicago.org/resource/7piw-z6r6.json?title=" + movie_title;
+           }
+
+          $.ajax({
+            url: url,
+            type: "GET",
+            data: {
+              "$limit" : 5000,
+              "$$app_token" : "guIFCBBz20RaL7RHQPqYrLM7M"
+            }
+          }).done(function(data) {
+            console.log(data);
+            $.each(data, function(i, d) {
+              movie_list.append('<li><div class="movie-card">'
+                + "<h5>Movie Title: " + d.title + "</h5>"
+                + "<p>Date: " + d.day  + ", " + d.date + "</p>"
+                + "<p>Location: " + d.park + ", " + d.park_address + "</p>"
+                + '</div></li>');
+            });
+          });
+        }
+      });
+  });
+</script>
