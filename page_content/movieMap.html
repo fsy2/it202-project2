@@ -7,7 +7,7 @@
 <script>
   function initMap() {
     var map = new google.maps.Map(
-      document.getElementById('map'), {zoom: 4, center: {lat: 40.0, lng: -80.0}});
+      document.getElementById('map'), {zoom: 4, center: {lat: 41.5, lng: -87.0}});
     for (var i = 0; i < location_list.length; i++) {
       console.log(location_list[i].latitude + ", " + location_list[i].longitude);
       var temp = {lat: parseFloat(location_list[i].latitude), lng: parseFloat(location_list[i].longitude)};
@@ -25,7 +25,6 @@
 </script>
 
 <style>
-   /* Set the size of the div element that contains the map */
   #map {
     height: 400px;
     width: 100%;
