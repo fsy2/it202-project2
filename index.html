@@ -29,11 +29,11 @@
       <li class="nav-item">
         <a class="nav-link" href="#movies">Movies</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#movieMap">Map</a>
+			<li class="nav-item">
+        <a class="nav-link" href="#list">List</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#about">About</a>
+        <a class="nav-link" href="#movieMap">Map</a>
       </li>
     </ul>
   </div>
@@ -46,18 +46,62 @@
   <div class="content" id="movies">
     This is the movie search screen.
   </div>
+	<div class="content" id="list">
+    This is the list of movies screen.
+  </div>
   <div class="content" style = "height:100%" id="movieMap">
     This is the map screen screen.
-  </div>
-  <div class="content" id="about">
-    About
   </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
   <script>
-		var gavin = "Gavin";
+		function parseDate(str) {
+			var temp = str.substring(0, 9).split("-");
+			var retStr = "";
+
+			if (temp[2] == 1) {
+				retStr += "January ";
+			}
+			else if (temp[2] == 2) {
+				retStr += "February ";
+			}
+			else if (temp[2] == 3) {
+				retStr += "March ";
+			}
+			else if (temp[2] == 4) {
+				retStr += "April ";
+			}
+			else if (temp[2] == 5) {
+				retStr += "May ";
+			}
+			else if (temp[2] == 6) {
+				retStr += "June ";
+			}
+			else if (temp[2] == 7) {
+				retStr += "July ";
+			}
+			else if (temp[2] == 8) {
+				retStr += "August ";
+			}
+			else if (temp[2] == 9) {
+				retStr += "September ";
+			}
+			else if (temp[2] == 10) {
+				retStr += "October ";
+			}
+			else if (temp[2] == 11) {
+				retStr += "November ";
+			}
+			else if (temp[2] == 12) {
+				retStr += "December ";
+			}
+
+			retStr += temp[1] + ", " + temp[0];
+			return retStr;
+		}
+			var movie_info_list= new Array();
 		var location_list = new Array();
     $(document).ready(function() {
       function hideScreens() {

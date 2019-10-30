@@ -1,0 +1,22 @@
+<h1>List</h1>
+<p>Here is the list of movies you searched for in the search screen!</p>
+<ul id='movie-list'></ul>
+
+<script>
+  $(document).ready(function() {
+    var movie_list = $('#movie-list'); // movie list
+    for (var i = 0; i < movie_info_list.length; i++) {
+      movie_list.append('<li><div class="movie-card">'
+        + "<h5>Movie Title: " + movie_info_list[i].title + "</h5>"
+        + "<p>Date: " + movie_info_list[i].day  + ", " + movie_info_list[i].date + "</p>"
+        + "<p>Location: " + movie_info_list[i].park + ", " + movie_info_list[i].park_address + "</p>"
+        + '</div></li>');
+    }
+  });
+</script>
+
+<style media="screen">
+  .movie-card {
+    padding-top: 50px;
+  }
+</style>

@@ -58,10 +58,11 @@
             $.each(data, function(i, d) {
               movie_list.append('<li><div class="movie-card">'
                 + "<h5>Movie Title: " + d.title + "</h5>"
-                + "<p>Date: " + d.day  + ", " + d.date + "</p>"
+                + "<p>Date: " + d.day  + ", " + parseDate(d.date) + "</p>"
                 + "<p>Location: " + d.park + ", " + d.park_address + "</p>"
+                + "<p>CC: " + (d.cc == "Y" ? "Yes" : "No") + "</p>"
                 + '</div></li>');
-              console.log(d.location.latitude + ", " + d.location.longitude);
+              movie_info_list.push(d);
               location_list.push(d.location);
             });
           });

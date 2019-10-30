@@ -1,22 +1,30 @@
 <h2>Maps</h2>
 <p>Search for movie markers here in the City of Chicago!</p>
-<!--The div element for the map -->
 <div id="map"></div>
-
 
 <script>
   function initMap() {
     var map = new google.maps.Map(
       document.getElementById('map'), {zoom: 4, center: {lat: 41.5, lng: -87.0}});
-    for (var i = 0; i < location_list.length; i++) {
-      console.log(location_list[i].latitude + ", " + location_list[i].longitude);
-      var temp = {lat: parseFloat(location_list[i].latitude), lng: parseFloat(location_list[i].longitude)};
-      var marker = new google.maps.Marker({position: temp, map: map});
-    }
-  }
+    for (var i = 0; i < movie_info_list.length; i++) {
+      // console.log(location_list[i].latitude + ", " + location_list[i].longitude);
+      var contentString = '<div id="content">'
+        + "<p>Movie Title: " + movie_info_list[i].title + "</p>"
+        + "<p>Date: " + movie_info_list[i].day  + ", " + parseDate(movie_info_list[i].date) + "</p>"
+        + "<p>Location: " + movie_info_list[i].park + ", " + movie_info_list[i].park_address + "</p>"
+        + "<p>CC: " + (movie_info_list[i].cc == "Y" ? "Yes" : "No") + "</p>"
+        + '</div>'
 
-  function clearMarkers() {
-    return;
+      var infowindow = new google.maps.InfoWindow({
+        content: contentString
+      });
+
+      var temp = {lat: parseFloat(movie_info_list[i].location.latitude), lng: parseFloat(movie_info_list[i].location.longitude)};
+      var marker = new google.maps.Marker({position: temp, map: map});
+      marker.addListener('click', function() {
+        infowindow.open(map, marker);
+      });
+    }
   }
 </script>
 
